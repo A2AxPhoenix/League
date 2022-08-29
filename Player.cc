@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <stdexcept>
+#include <limits>
 using P = Player;
 using u64 = uint64_t;
 using namespace std;
@@ -34,11 +35,21 @@ P::Player(string newName, string newTeam, string newRank) {
 		u64 P::get_ownGoals() const { return ownGoals; }
 		// TODO: Finish the Mutators and the remaining functions below
 		// Mutators
-		void P::set_name(string newName) {}
-		void P::set_team(string newTeam) {}
-		void P::set_rank(string newRank) {}
-		void P::set_gamesPlayed(u64 newGamesPlayed) {}
-		void P::set_score(u64 newScore) {}
+		void P::set_name(string newName) { name = newName; }
+		void P::set_team(string newTeam) { team = newTeam; }
+		void P::set_rank(string newRank) { rank = newRank; }
+		void P::set_gamesPlayed(u64 newGamesPlayed) {
+			// Games played cannot be a negative number.
+			if (newGamesPlayed < 0) throw runtime_error("Games played cannot be less than 0.\n Please enter a positive number.\n");
+			// Games played cannot exceed the max limits of integers
+			if (newGamesPlayed >= numeric_limits<uint64_t>::max()) throw runtime_error("Games played cannot exceed accepted values.\nTry again with values in accepted range.\n");
+			gamesPlayed = newGamesPlayed;
+		}
+		void P::set_score(u64 newScore) {
+			if (newScore < 0) throw runtime_error("Score cannot be less than 0.\n Please enter a positive number.\n");
+			if (newScore >= numeric_limits<uint64_t>::max()) throw runtime_error("Score cannot exceed accepted values.\nTry again with values in accepted range.\n");
+			score = newScore;
+		}
 		void P::set_averageScore(double newAverageScore) {}
 		void P::set_goals(u64 newGoals) {}
 		void P::set_averageGoals(double newAverageGoals) {}
@@ -72,3 +83,4 @@ P::Player(string newName, string newTeam, string newRank) {
 	bool sort_by_saves(const Player &p1, const Player &p2) {}
 	bool sort_by_averageSaves(const Player &p1, const Player &p2) {}
 	bool sort_by_mvps(const Player &p1, const Player &p2) {}
+	void print_stats(const Player &p) {}

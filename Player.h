@@ -10,6 +10,7 @@ class Player {
 		std::string name;
 		std::string team;
 		std::string rank;
+		u64 rating;
 		u64 gamesPlayed;
 		u64 score;
 		double averageScore;
@@ -24,6 +25,8 @@ class Player {
 		u64 totalPlaymaker;
 		u64 totalSavior;
 		u64 ownGoals;
+		bool isRisingStar;
+		bool isAllStar;
 	public:
 		// Constructors
 		Player();
@@ -86,5 +89,6 @@ class Player {
 	bool sort_by_saves(const Player &p1, const Player &p2);
 	bool sort_by_averageSaves(const Player &p1, const Player &p2);
 	bool sort_by_mvps(const Player &p1, const Player &p2);
+	void print_stats(const Player &p);
 
 #endif
